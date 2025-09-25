@@ -1,0 +1,34 @@
+<div class="stop-selector">
+  <h2>Wybierz przystanek Luas</h2>
+  
+  <div class="selector-container">
+    <select [(ngModel)]="selectedStop" (change)="onStopSelect()" class="stop-select">
+      <option value="">-- Wybierz przystanek --</option>
+      @for (stopName of stopNames; track stopName) {
+        <option [value]="stopName">
+          {{ stopName }}
+        </option>
+      }
+    </select>
+  </div>
+
+  @if (loading) {
+    <div class="loading">
+      Ładowanie danych...
+      <span class="spinner"></span>
+    </div>
+  }
+
+  @if (error) {
+    <div class="error">
+      {{ error }}
+    </div>
+  }
+
+  @if (luasData && !loading) {
+    <div class="results">
+      <h3>Informacje o przystanku: {{ selectedStop }}</h3>
+      <pre>{{ luasData | json }}</pre>
+    </div>
+  }
+</div>
