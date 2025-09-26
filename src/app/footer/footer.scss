@@ -1,0 +1,9 @@
+@use '../../styles/variables';
+
+footer {
+  min-height: 2rem;
+  border-top: 1px solid variables.$primary;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
