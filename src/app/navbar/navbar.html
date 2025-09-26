@@ -1,15 +1,12 @@
 <nav class="navbar">
   <h1>{{ heading }}</h1>
-  <div class="language-switcher">
-    <button 
-      [class.active]="locale === lang.EN" 
-      (click)="switchLanguage(lang.EN)">
-      EN
+  @if (locale === lang.EN) {
+    <button (click)="switchLanguage(lang.GA)">
+      <img src="/flags/ie.svg" alt="GA">
     </button>
-    <button 
-      [class.active]="locale === lang.GA" 
-      (click)="switchLanguage(lang.GA)">
-      GA
+  } @else {
+    <button (click)="switchLanguage(lang.EN)">
+      <img src="/flags/gb.svg" alt="EN">
     </button>
-  </div>
+  }
 </nav>

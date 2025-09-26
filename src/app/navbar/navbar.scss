@@ -1,7 +1,7 @@
-@import '../../styles/variables';
+@use '../../styles/variables';
 
 .navbar {
-  background-color: $primary;
+  background-color: variables.$primary;
   color: white;
   width: 100%;
   padding: 1rem 2rem;
@@ -17,34 +17,18 @@
     font-weight: 600;
   }
   
-  .language-switcher {
-    display: flex;
-    gap: 0.5rem;
-    
-    button {
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 0.9rem;
-      
+  button {
+    border: none;
+    background: none;
+
+    img {
+      width: 2rem;
+      height: auto;
+      display: block;
+      border-radius: 0.25rem;
+
       &:hover {
-        background: rgba(255, 255, 255, 0.3);
-        transform: translateY(-1px);
-      }
-      
-      &.active {
-        background: rgba(255, 255, 255, 0.9);
-        color: $primary;
-        font-weight: 600;
-      }
-      
-      &:focus {
-        outline: 2px solid rgba(255, 255, 255, 0.5);
-        outline-offset: 2px;
+        cursor: pointer;
       }
     }
   }

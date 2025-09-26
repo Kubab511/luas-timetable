@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { StopSelector } from '../stop-selector/stop-selector';
 import { Navbar } from '../navbar/navbar';
 import { lang } from '../types/lang';
@@ -16,16 +17,17 @@ import { lang } from '../types/lang';
 export class Home implements OnInit {
   locale: lang = lang.EN;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private titleService: Title) {}
 
   ngOnInit() {
     const currentRoute = this.router.url;
-    if (currentRoute === '/ga') {
-      this.locale = lang.GA;
-    } else {
-      this.locale = lang.EN;
-    }
+    this.locale = (currentRoute === '/ga') ? lang.GA : lang.EN;
+    
+    this.updatePageTitle();
   }
 
-  
+  private updatePageTitle() {
+    const title = this.locale === lang.EN ? 'Luas Timetable' : 'Amchlár Luais';
+    this.titleService.setTitle(title);
+  }
 }
