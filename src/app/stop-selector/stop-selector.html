@@ -6,7 +6,7 @@
       <option value="">-- Wybierz przystanek --</option>
       @for (stopName of stopNames; track stopName) {
         <option [value]="stopName">
-          {{ stopName }}
+          {{ stopName | translateStopName }}
         </option>
       }
     </select>

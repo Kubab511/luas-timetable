@@ -1,7 +1,7 @@
 @if (timetable) {
   <div class="timetable-container">
     <div class="stop-info">
-      <h3>{{ timetable.stop.name }}</h3>
+      <h3>{{ timetable.stop.name | translateStopName }}</h3>
       <p class="stop-details">
         <span class="abbreviation">{{ timetable.stop.abbreviation }}</span>
         <span class="created-date">Dane pobrane o: {{ timetable.stop.created | date:'HH:mm:ss' }}</span>
