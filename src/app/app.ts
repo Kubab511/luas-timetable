@@ -1,5 +1,5 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit, signal } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { Footer } from './footer/footer';
 
 @Component({
@@ -11,6 +11,15 @@ import { Footer } from './footer/footer';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class App implements OnInit {
   protected readonly title = signal('luas-timetable');
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+      const savedLang = localStorage.getItem('lang');
+      if (savedLang === 'ga') {
+        this.router.navigate([savedLang]);
+      }
+  }
 }

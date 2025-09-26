@@ -11,13 +11,25 @@ import { lang } from '../types/lang';
 export class Navbar {
   @Input() locale: lang = lang.EN;
   lang = lang;
+  isDropdownOpen = false;
 
-  constructor(private router: Router) {
-    console.log(this.locale);
-  }
+  constructor(private router: Router) {}
 
   get heading() {
     return (this.locale === lang.EN) ? "Luas Timetable" : "Amchlár Luais";
+  }
+  
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+  
+  selectLanguage(newLang: lang) {
+    this.isDropdownOpen = false;
+    if (this.locale !== newLang) {
+      const targetRoute = newLang === lang.GA ? '/ga' : '/';
+      localStorage.setItem("lang", (newLang === lang.GA) ? 'ga' : 'en');
+      this.router.navigate([targetRoute]);
+    }
   }
   
   switchLanguage(newLang: lang) {
