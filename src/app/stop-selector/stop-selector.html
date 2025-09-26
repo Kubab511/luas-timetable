@@ -26,9 +26,6 @@
   }
 
   @if (luasData && !loading) {
-    <div class="results">
-      <h3>Informacje o przystanku: {{ selectedStop }}</h3>
-      <pre>{{ luasData | json }}</pre>
-    </div>
+    <app-display-timetable [timetable]="luasData" />
   }
 </div>

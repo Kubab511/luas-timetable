@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TimetableService } from '../services/timetable-service';
+import { DisplayTimetable } from '../display-timetable/display-timetable';
 
 const stopCodes: { [key: string]: string } = {
   "The Point": "TPT",
@@ -78,7 +79,7 @@ const stopCodes: { [key: string]: string } = {
 
 @Component({
   selector: 'app-stop-selector',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DisplayTimetable],
   templateUrl: './stop-selector.html',
   styleUrl: './stop-selector.scss'
 })

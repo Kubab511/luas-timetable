@@ -1,0 +1,47 @@
+@if (timetable) {
+  <div class="timetable-container">
+    <div class="stop-info">
+      <h3>{{ timetable.stop.name }}</h3>
+      <p class="stop-details">
+        <span class="abbreviation">{{ timetable.stop.abbreviation }}</span>
+        <!-- <span class="created-date">Utworzono: {{ timetable.stop.created | date:'short' }}</span> -->
+      </p>
+    </div>
+
+    @if (timetable.message) {
+      <div class="system-message">
+        {{ timetable.message }}
+      </div>
+    }
+
+    <div class="directions">
+      @for (direction of timetable.directions; track direction.name) {
+        <div class="direction">
+          <h4 class="direction-name">{{ direction.name }}</h4>
+          
+          @if (direction.trams && direction.trams.length > 0) {
+            <div class="trams-list">
+              @for (tram of direction.trams; track $index) {
+                <div class="tram-item">
+                  <div class="due-time">
+                    @if (tram.dueMins === 'DUE' || tram.dueMins === '0') {
+                      <span class="due-now">DUE</span>
+                    } @else {
+                      <span class="due-minutes">{{ tram.dueMins }}</span>
+                      <span class="minutes-label">min</span>
+                    }
+                  </div>
+                  <div class="destination">{{ tram.destination }}</div>
+                </div>
+              }
+            </div>
+          } @else {
+            <div class="no-trams">
+              <span>Brak dostępnych tramwajów</span>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+}
