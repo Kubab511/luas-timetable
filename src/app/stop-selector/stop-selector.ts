@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TimetableService } from '../services/timetable-service';
 
 const stopCodes: { [key: string]: string } = {
   "The Point": "TPT",
@@ -83,7 +84,7 @@ const stopCodes: { [key: string]: string } = {
   styleUrl: './stop-selector.scss'
 })
 export class StopSelector {
-  private http = inject(HttpClient);
+  constructor(private timetableService: TimetableService) {}
   
   stopCodes = stopCodes;
   stopNames = Object.keys(stopCodes);
@@ -104,7 +105,7 @@ export class StopSelector {
     this.error = '';
     this.luasData = null;
 
-    this.http.get(`https://api.barabasz.dev/v1/luas?stop=${stopCode}`).subscribe({
+    this.timetableService.getTimetable(stopCode).subscribe({
       next: (data) => {
         this.luasData = data;
         this.loading = false;
