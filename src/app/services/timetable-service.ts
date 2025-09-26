@@ -5,10 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TimetableService {
-  private baseUrl = 'https://api.barabasz.dev/v1';
+  private baseUrl = 'https://api.barabasz.dev/v1/luas?stop=';
   constructor(private http: HttpClient) {}
 
   getTimetable(stopCode: string) {
-    return this.http.get(`${this.baseUrl}/luas?stop=${stopCode}`);
+    return this.http.get(`${this.baseUrl}${stopCode}`);
   }
 }

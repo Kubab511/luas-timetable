@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TimetableService } from '../services/timetable-service';
@@ -83,7 +82,7 @@ const stopCodes: { [key: string]: string } = {
   templateUrl: './stop-selector.html',
   styleUrl: './stop-selector.scss'
 })
-export class StopSelector {
+export class StopSelector implements OnInit {
   constructor(private timetableService: TimetableService) {}
   
   stopCodes = stopCodes;
@@ -93,9 +92,16 @@ export class StopSelector {
   loading = false;
   error = '';
 
+  ngOnInit(): void {
+    this.selectedStop = localStorage.getItem("lastStop") ?? '';
+    if (this.selectedStop !== '') 
+      this.fetchLuasData();
+  }
+
   onStopSelect() {
     if (this.selectedStop) {
       this.fetchLuasData();
+      localStorage.setItem("lastStop", this.selectedStop);
     }
   }
 
