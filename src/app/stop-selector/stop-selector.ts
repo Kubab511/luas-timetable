@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TimetableService } from '../services/timetable-service';
 import { DisplayTimetable } from '../display-timetable/display-timetable';
+import { lang } from '../types/lang';
 
 const stopCodes: { [key: string]: string } = {
   "The Point": "TPT",
@@ -85,6 +86,7 @@ const stopCodes: { [key: string]: string } = {
 })
 export class StopSelector implements OnInit {
   constructor(private timetableService: TimetableService) {}
+  @Input() locale: lang = lang.EN;
   
   stopCodes = stopCodes;
   stopNames = Object.keys(stopCodes);
@@ -123,5 +125,9 @@ export class StopSelector implements OnInit {
         console.error('API Error:', err);
       }
     });
+  }
+
+  get chooseStop() {
+    return (this.locale === lang.EN) ? "Choose a stop" : "Roghnaigh stad"
   }
 }
