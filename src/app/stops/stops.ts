@@ -364,25 +364,25 @@ export const stops: stop[] = [
   {
     nameEN: "Kylemore",
     nameGA: "An Chill Mhór",
-    line: line.GREEN,
+    line: line.RED,
     code: "KYL"
   },
   {
     nameEN: "Red Cow",
     nameGA: "An Bhó Dhearg",
-    line: line.GREEN,
+    line: line.RED,
     code: "RED"
   },
   {
     nameEN: "Kingswood",
     nameGA: "Coill an Rí",
-    line: line.GREEN,
+    line: line.RED,
     code: "KIN"
   },
   {
     nameEN: "Belgard",
     nameGA: "Belgard",
-    line: line.GREEN,
+    line: line.RED,
     code: "BEL"
   },
   {
