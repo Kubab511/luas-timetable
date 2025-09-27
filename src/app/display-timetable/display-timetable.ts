@@ -3,6 +3,8 @@ import { Timetable } from '../types/timetable';
 import { CommonModule } from '@angular/common';
 import { translateStopNamePipe } from '../pipes/translateName';
 import { lang } from '../types/lang';
+import { stops } from '../stops/stops';
+import { line } from '../types/stop';
 
 @Component({
   selector: 'app-display-timetable',
@@ -19,5 +21,34 @@ export class DisplayTimetable {
 
   get due() {
     return (this.locale === lang.EN) ? "NOW" : "ANOIS"
+  }
+
+  get stopLineClass() {
+    if (!this.timetable) return '';
+    
+    const stop = stops.find(s => s.code === this.timetable!.stop.abbreviation);
+    if (!stop) return '';
+    
+    return stop.line === line.GREEN ? 'green-line' : 'red-line';
+  }
+
+  get northbound() {
+    return (this.locale === lang.EN) ? "Northbound" : "Ó thuaidh";
+  }
+
+  get southbound() {
+    return (this.locale === lang.EN) ? "Southbound" : "Ó dheas";
+  }
+
+  get eastbound() {
+    return (this.locale === lang.EN) ? "Eastbound" : "Soir";
+  }
+
+  get westbound() {
+    return (this.locale === lang.EN) ? "Westbound" : "Siar";
+  }
+
+  get lastRefreshed() {
+    return (this.locale === lang.EN) ? "Last refreshed" : "Athnuachan deireanach";
   }
 }

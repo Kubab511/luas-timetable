@@ -1,10 +1,10 @@
 @if (timetable) {
   <div class="timetable-container">
-    <div class="stop-info">
+    <div class="stop-info" [class]="stopLineClass">
       <h3>{{ timetable.stop.name | translateStopName }}</h3>
       <p class="stop-details">
-        <span class="abbreviation">{{ timetable.stop.abbreviation }}</span>
-        <span class="created-date">Dane pobrane o: {{ timetable.stop.created | date:'HH:mm:ss' }}</span>
+        <!-- <span class="abbreviation">{{ timetable.stop.abbreviation }}</span> -->
+        <span class="created-date">{{ lastRefreshed }}: {{ timetable.stop.created | date:'HH:mm:ss' }}</span>
       </p>
     </div>
 

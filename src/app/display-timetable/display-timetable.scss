@@ -8,13 +8,24 @@
 }
 
 .stop-info {
-  background: linear-gradient(135deg, #4F3189, #6a4db8);
   color: white;
   padding: 20px;
   border-radius: 12px;
   margin-bottom: 20px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  &.green-line {
+    background: variables.$luas-green;
+  }
+
+  &.red-line {
+    background: variables.$luas-red;
+  }
+
+  &:not(.green-line):not(.red-line) {
+    background: linear-gradient(135deg, #4F3189, #6a4db8);
+  }
 
   h3 {
     margin: 0 0 10px 0;
@@ -31,13 +42,6 @@
     flex-wrap: wrap;
     font-size: 14px;
     opacity: 0.9;
-
-    .abbreviation {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-weight: bold;
-    }
   }
 }
 
