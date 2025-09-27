@@ -17,9 +17,9 @@ export class App implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-      const savedLang = localStorage.getItem('lang');
-      if (savedLang === 'ga') {
-        this.router.navigate([savedLang]);
-      }
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang === 'ga') {
+      this.router.navigate([savedLang]);
+    }
   }
 }

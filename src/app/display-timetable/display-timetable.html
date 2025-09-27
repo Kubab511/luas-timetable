@@ -25,13 +25,13 @@
                 <div class="tram-item">
                   <div class="due-time">
                     @if (tram.dueMins === 'DUE' || tram.dueMins === '0') {
-                      <span class="due-now">DUE</span>
+                      <span class="due-now">{{ due }}</span>
                     } @else {
                       <span class="due-minutes">{{ tram.dueMins }}</span>
                       <span class="minutes-label">min</span>
                     }
                   </div>
-                  <div class="destination">{{ tram.destination }}</div>
+                  <div class="destination">{{ tram.destination | translateStopName }}</div>
                 </div>
               }
             </div>

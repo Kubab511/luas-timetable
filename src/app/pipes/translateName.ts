@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { stopNames } from '../stops/stopNames';
+import { stops } from '../stops/stops';
 
 @Pipe({
-    name: 'translateStopName',
+  name: 'translateStopName',
 })
 export class translateStopNamePipe implements PipeTransform {
   private router = inject(Router);
@@ -11,8 +11,9 @@ export class translateStopNamePipe implements PipeTransform {
   transform(value: string): string {
     const currentUrl = this.router.url;
     
-    if (currentUrl === '/ga' && stopNames[value]) {
-      return stopNames[value];
+    if (currentUrl === '/ga') {
+      const stop = stops.find(s => s.nameEN === value);
+      return stop ? stop.nameGA : value;
     }
     
     return value;

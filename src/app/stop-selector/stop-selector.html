@@ -3,10 +3,10 @@
   
   <div class="selector-container">
     <select [(ngModel)]="selectedStop" (change)="onStopSelect()" class="stop-select">
-      <option value="">-- Wybierz przystanek --</option>
-      @for (stopName of stopNames; track stopName) {
-        <option [value]="stopName">
-          {{ stopName | translateStopName }}
+      <option value="">-- {{ chooseStop }} --</option>
+      @for (stop of stops; track stop.code) {
+        <option [value]="stop.code">
+          {{ stop.nameEN | translateStopName }}
         </option>
       }
     </select>
@@ -14,7 +14,7 @@
 
   @if (loading) {
     <div class="loading">
-      Ładowanie danych...
+      {{ loadingData }}
       <span class="spinner"></span>
     </div>
   }
@@ -26,6 +26,6 @@
   }
 
   @if (luasData && !loading) {
-    <app-display-timetable [timetable]="luasData" />
+    <app-display-timetable [timetable]="luasData" [locale]="locale" />
   }
 </div>
