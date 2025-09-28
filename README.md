@@ -12,7 +12,7 @@ A modern Angular web application for viewing LUAS tram timetables in Dublin, Ire
 
 ## Live Demo
 
-This project is hosted on: [https://https://luas.barabasz.dev/](https://https://luas.barabasz.dev/)
+This project is hosted on: [https://luas.barabasz.dev/](https://luas.barabasz.dev/)
 
 ## Technical Details
 
