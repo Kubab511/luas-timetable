@@ -51,4 +51,28 @@ export class DisplayTimetable {
   get lastRefreshed() {
     return (this.locale === lang.EN) ? "Last refreshed" : "Athnuachan deireanach";
   }
+
+  get noTrams() {
+    return (this.locale === lang.EN) ? "No trams" : "Gan tramanna";
+  }
+
+  getDirectionName(directionName: string): string {
+    if (!this.timetable) return directionName;
+    
+    const stop = stops.find(s => s.code === this.timetable!.stop.abbreviation);
+    if (!stop) return directionName;
+    
+    const isInbound = directionName.toLowerCase().includes('inbound');
+    const isOutbound = directionName.toLowerCase().includes('outbound');
+    
+    if (stop.line === line.GREEN) {
+      if (isInbound) return this.northbound;
+      if (isOutbound) return this.southbound;
+    } else if (stop.line === line.RED) {
+      if (isInbound) return this.eastbound;
+      if (isOutbound) return this.westbound;
+    }
+    
+    return directionName;
+  }
 }

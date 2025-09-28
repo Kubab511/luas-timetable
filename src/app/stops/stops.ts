@@ -402,5 +402,17 @@ export const stops: stop[] = [
     nameGA: "Tamhlacht",
     line: line.RED,
     code: "TAL"
+  },
+  {
+    nameEN: "No Northbound Service",
+    nameGA: "Gan aon tseirbhís ó thuaidh",
+    line: line.GREEN,
+    code: ""
+  },
+  {
+    nameEN: "No Southbound Service",
+    nameGA: "Gan aon tseirbhís ó dheas",
+    line: line.GREEN,
+    code: ""
   }
 ];
