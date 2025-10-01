@@ -19,40 +19,6 @@
     font-weight: 600;
   }
   
-  .navbar-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .dark-mode-toggle {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    padding: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
-    
-    &:focus {
-      outline: 2px solid rgba(255, 255, 255, 0.5);
-      outline-offset: 2px;
-    }
-    
-    &:active {
-      transform: translateY(0);
-    }
-    
-    svg {
-      transition: all 0.3s ease;
-    }
-  }
-  
   .language-dropdown {
     position: relative;
     

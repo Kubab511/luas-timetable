@@ -27,7 +27,7 @@ export class Home implements OnInit {
   }
 
   private updatePageTitle() {
-    const title = this.locale === lang.EN ? 'Luas Timetable' : 'Amchlár Luais';
+    const title = this.locale === lang.EN ? 'Luas Timetable' : 'Amchlár an Luais';
     this.titleService.setTitle(title);
   }
 }
