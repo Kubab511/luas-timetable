@@ -4,10 +4,10 @@
   <button class="dropdown-toggle" (click)="toggleDropdown()">
     @if (locale === lang.EN) {
       <img src="/flags/gb.svg" alt="EN">
-      <span>English</span>
+      <span class="desktop-only">English</span>
     } @else {
       <img src="/flags/ie.svg" alt="GA">
-      <span>Gaeilge</span>
+      <span class="desktop-only">Gaeilge</span>
     }
     <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="currentColor">
       <path d="M1 1.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>

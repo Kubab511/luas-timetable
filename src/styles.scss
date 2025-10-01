@@ -14,11 +14,6 @@ body {
   flex-direction: column;
 }
 
-body.dark-mode {
-  background-color: variables.$bg-dark;
-  color: variables.$text-dark;
-}
-
 app-root {
   display: flex;
   flex-direction: column;
@@ -27,4 +22,10 @@ app-root {
 
 .main-content {
   flex: 1;
+}
+
+@media only screen and (max-width: 600px) {
+  .desktop-only {
+    display: none;
+  }
 }
