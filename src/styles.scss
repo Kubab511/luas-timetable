@@ -1,13 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@use './styles/variables';
 
 html, body {
   margin: 0;
   min-height: 100vh;
+  background-color: variables.$bg-light;
+  color: variables.$text-light;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
   display: flex;
   flex-direction: column;
+}
+
+body.dark-mode {
+  background-color: variables.$bg-dark;
+  color: variables.$text-dark;
 }
 
 app-root {

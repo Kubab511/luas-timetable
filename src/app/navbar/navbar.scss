@@ -11,11 +11,46 @@
   align-items: center;
   box-sizing: border-box;
   margin: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
   
   h1 {
     margin: 0;
     font-size: 1.5rem;
     font-weight: 600;
+  }
+  
+  .navbar-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .dark-mode-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    
+    &:focus {
+      outline: 2px solid rgba(255, 255, 255, 0.5);
+      outline-offset: 2px;
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+    
+    svg {
+      transition: all 0.3s ease;
+    }
   }
   
   .language-dropdown {
@@ -62,29 +97,44 @@
       position: absolute;
       top: 100%;
       right: 0;
-      background: white;
+      background: variables.$bg-light;
       border: 1px solid #ddd;
       border-radius: 4px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       z-index: 1000;
       min-width: 140px;
       margin-top: 4px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      
+      :global(body.dark-mode) & {
+        background: variables.$bg-dark;
+        border-color: #555;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
       
       .dropdown-item {
         background: none;
         border: none;
-        color: #333;
+        color: variables.$text-light;
         padding: 0.75rem 1rem;
         width: 100%;
         text-align: left;
         cursor: pointer;
-        transition: background-color 0.2s ease;
+        transition: background-color 0.2s ease, color 0.3s ease;
         display: flex;
         align-items: center;
         gap: 0.5rem;
         
+        :global(body.dark-mode) & {
+          color: variables.$text-dark;
+        }
+        
         &:hover {
           background-color: #f5f5f5;
+          
+          :global(body.dark-mode) & {
+            background-color: #333;
+          }
         }
         
         &:first-child {

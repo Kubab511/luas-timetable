@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { lang } from '../types/lang';
+import { CommonService } from '../services/common-service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,10 +14,19 @@ export class Navbar {
   lang = lang;
   isDropdownOpen = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private commonService: CommonService) {}
+
+  get isDarkMode(): boolean {
+    return this.commonService.getDark();
+  }
+
+  toggleDarkMode() {
+    const currentDarkMode = this.commonService.getDark();
+    this.commonService.setDark(!currentDarkMode);
+  }
 
   get heading() {
-    return (this.locale === lang.EN) ? "Luas Timetable" : "Amchlár Luais";
+    return (this.locale === lang.EN) ? "Luas Timetable" : "Amchlár an Luais";
   }
   
   toggleDropdown() {
