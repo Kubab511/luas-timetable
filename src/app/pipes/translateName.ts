@@ -5,7 +5,7 @@ import { stops } from '../stops/stops';
 @Pipe({
   name: 'translateStopName',
 })
-export class translateStopNamePipe implements PipeTransform {
+export class TranslateStopNamePipe implements PipeTransform {
   private router = inject(Router);
 
   transform(value: string): string {

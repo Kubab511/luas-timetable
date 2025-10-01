@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TimetableService } from '../services/timetable-service';
+import { TimetableService } from '../services/timetable.service';
 import { DisplayTimetable } from '../display-timetable/display-timetable';
 import { lang } from '../types/lang';
-import { translateStopNamePipe } from '../pipes/translateName';
+import { TranslateStopNamePipe } from '../pipes/translateName';
 import { stops } from '../stops/stops';
+import { line } from '../types/stopType';
 
 @Component({
   selector: 'app-stop-selector',
@@ -13,7 +14,7 @@ import { stops } from '../stops/stops';
     CommonModule,
     FormsModule,
     DisplayTimetable,
-    translateStopNamePipe
+    TranslateStopNamePipe
   ],
   templateUrl: './stop-selector.html',
   styleUrl: './stop-selector.scss'
@@ -22,7 +23,7 @@ export class StopSelector implements OnInit {
   constructor(private timetableService: TimetableService) {}
   @Input() locale: lang = lang.EN;
   
-  stops = stops;
+  stops = stops.filter(stop => stop.line != line.NONE);
   selectedStop = '';
   luasData: any = null;
   loading = false;

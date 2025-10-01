@@ -1,9 +1,10 @@
 export enum line {
   GREEN,
-  RED
+  RED,
+  NONE
 };
 
-export interface stop {
+export interface StopType {
   nameEN: string,
   nameGA: string,
   line: line,

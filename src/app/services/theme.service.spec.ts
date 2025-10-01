@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TimetableService } from './timetable-service';
+import { ThemeService } from './theme.service';
 
-describe('TimetableService', () => {
-  let service: TimetableService;
+describe('ThemeService', () => {
+  let service: ThemeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TimetableService);
+    service = TestBed.inject(ThemeService);
   });
 
   it('should be created', () => {

@@ -1,6 +1,10 @@
 @use '../../styles/variables';
 @use 'sass:color';
 
+:root.dark-mode .navbar {
+  background-color: darken(variables.$primary, 10%);
+}
+
 .navbar {
   background-color: variables.$primary;
   color: white;
@@ -18,11 +22,14 @@
     font-size: 1.5rem;
     font-weight: 600;
   }
-  
-  .language-dropdown {
-    position: relative;
+
+  .options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
     
-    .dropdown-toggle {
+    .dark-mode-toggle {
       background: rgba(255, 255, 255, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.3);
       color: white;
@@ -32,91 +39,38 @@
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: center;
       
       &:focus {
         outline: 2px solid rgba(255, 255, 255, 0.5);
         outline-offset: 2px;
       }
       
-      img {
+      svg {
         width: 20px;
-        height: auto;
+        height: 20px;
         flex-shrink: 0;
-        border-radius: 0.25rem;
-      }
-      
-      span {
-        flex: 1;
-        text-align: left;
-        font-size: 0.9rem;
-      }
-      
-      .dropdown-arrow {
-        flex-shrink: 0;
-        transition: transform 0.2s ease;
       }
     }
     
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: variables.$bg-light;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      z-index: 1000;
-      min-width: 140px;
-      margin-top: 4px;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
+    .language-dropdown {
+      position: relative;
       
-      :global(body.dark-mode) & {
-        background: variables.$bg-dark;
-        border-color: #555;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      }
-      
-      .dropdown-item {
-        background: none;
-        border: none;
-        color: variables.$text-light;
-        padding: 0.75rem 1rem;
-        width: 100%;
-        text-align: left;
+      .dropdown-toggle {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
         cursor: pointer;
-        transition: background-color 0.2s ease, color 0.3s ease;
+        transition: all 0.2s ease;
         display: flex;
         align-items: center;
         gap: 0.5rem;
         
-        :global(body.dark-mode) & {
-          color: variables.$text-dark;
-        }
-        
-        &:hover {
-          background-color: #f5f5f5;
-          
-          :global(body.dark-mode) & {
-            background-color: #333;
-          }
-        }
-        
-        &:first-child {
-          border-radius: 4px 4px 0 0;
-        }
-        
-        &:last-child {
-          border-radius: 0 0 4px 4px;
-        }
-        
-        &.active {
-          background-color: variables.$primary;
-          color: white;
-          
-          &:hover {
-            background-color: color.adjust(variables.$primary, $lightness: -10%);
-          }
+        &:focus {
+          outline: 2px solid rgba(255, 255, 255, 0.5);
+          outline-offset: 2px;
         }
         
         img {
@@ -128,7 +82,88 @@
         
         span {
           flex: 1;
+          text-align: left;
           font-size: 0.9rem;
+        }
+        
+        .dropdown-arrow {
+          flex-shrink: 0;
+          transition: transform 0.2s ease;
+        }
+      }
+      
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: variables.$bg-light;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        min-width: 140px;
+        margin-top: 4px;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+        
+        :global(body.dark-mode) & {
+          background: variables.$bg-dark;
+          border-color: #555;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dropdown-item {
+          background: none;
+          border: none;
+          color: variables.$text-light;
+          padding: 0.75rem 1rem;
+          width: 100%;
+          text-align: left;
+          cursor: pointer;
+          transition: background-color 0.2s ease, color 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          
+          :global(body.dark-mode) & {
+            color: variables.$text-dark;
+          }
+          
+          &:hover {
+            background-color: #f5f5f5;
+            
+            :global(body.dark-mode) & {
+              background-color: #333;
+            }
+          }
+          
+          &:first-child {
+            border-radius: 4px 4px 0 0;
+          }
+          
+          &:last-child {
+            border-radius: 0 0 4px 4px;
+          }
+          
+          &.active {
+            background-color: variables.$primary;
+            color: white;
+            
+            &:hover {
+              background-color: color.adjust(variables.$primary, $lightness: -10%);
+            }
+          }
+          
+          img {
+            width: 20px;
+            height: auto;
+            flex-shrink: 0;
+            border-radius: 0.25rem;
+          }
+          
+          span {
+            flex: 1;
+            font-size: 0.9rem;
+          }
         }
       }
     }

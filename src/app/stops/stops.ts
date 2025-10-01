@@ -1,6 +1,6 @@
-import { stop, line } from "../types/stop";
+import { StopType, line } from "../types/stopType";
 
-export const stops: stop[] = [
+export const stops: StopType[] = [
   {
     nameEN: "The Point",
     nameGA: "Iosta na Rinne",
@@ -406,13 +406,13 @@ export const stops: stop[] = [
   {
     nameEN: "No Northbound Service",
     nameGA: "Gan aon tseirbhís ó thuaidh",
-    line: line.GREEN,
-    code: ""
+    line: line.NONE,
+    code: "NNS"
   },
   {
     nameEN: "No Southbound Service",
     nameGA: "Gan aon tseirbhís ó dheas",
-    line: line.GREEN,
-    code: ""
+    line: line.NONE,
+    code: "NSS"
   }
 ];

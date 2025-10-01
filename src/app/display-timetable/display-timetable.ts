@@ -1,16 +1,16 @@
 import { Component, Input } from '@angular/core';
 import { Timetable } from '../types/timetable';
 import { CommonModule } from '@angular/common';
-import { translateStopNamePipe } from '../pipes/translateName';
+import { TranslateStopNamePipe } from '../pipes/translateName';
 import { lang } from '../types/lang';
 import { stops } from '../stops/stops';
-import { line } from '../types/stop';
+import { line } from '../types/stopType';
 
 @Component({
   selector: 'app-display-timetable',
   imports: [
     CommonModule,
-    translateStopNamePipe
+    TranslateStopNamePipe
   ],
   templateUrl: './display-timetable.html',
   styleUrl: './display-timetable.scss'

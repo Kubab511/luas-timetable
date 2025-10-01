@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { lang } from '../types/lang';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ export class Navbar {
   lang = lang;
   isDropdownOpen = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, protected themeService: ThemeService) { }
 
   get heading() {
     return (this.locale === lang.EN) ? "Luas Timetable" : "Amchlár an Luais";
@@ -21,6 +22,10 @@ export class Navbar {
   
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
+  }
+  
+  toggleDarkMode() {
+    this.themeService.toggleTheme();
   }
   
   selectLanguage(newLang: lang) {
