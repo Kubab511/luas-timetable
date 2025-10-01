@@ -28,7 +28,7 @@
                       <span class="due-now">{{ due }}</span>
                     } @else {
                       <span class="due-minutes">{{ tram.dueMins }}</span>
-                      <span class="minutes-label">min</span>
+                      <span class="minutes-label">{{ minutes }}</span>
                     }
                   </div>
                   <div class="destination">{{ tram.destination | translateStopName }}</div>

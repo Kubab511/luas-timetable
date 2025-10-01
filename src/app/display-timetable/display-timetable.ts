@@ -56,6 +56,10 @@ export class DisplayTimetable {
     return (this.locale === lang.EN) ? "No trams" : "Gan tramanna";
   }
 
+  get minutes() {
+    return (this.locale === lang.EN) ? "min" : "nóim";
+  }
+
   getDirectionName(directionName: string): string {
     if (!this.timetable) return directionName;
     
