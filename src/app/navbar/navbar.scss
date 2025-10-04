@@ -1,10 +1,6 @@
 @use '../../styles/variables';
 @use 'sass:color';
 
-:root.dark-mode .navbar {
-  background-color: darken(variables.$primary, 10%);
-}
-
 .navbar {
   background-color: variables.$primary;
   color: white;
@@ -16,7 +12,7 @@
   box-sizing: border-box;
   margin: 0;
   transition: background-color 0.3s ease, color 0.3s ease;
-  
+
   h1 {
     margin: 0;
     font-size: 1.5rem;
@@ -104,13 +100,15 @@
         min-width: 140px;
         margin-top: 4px;
         transition: background-color 0.3s ease, border-color 0.3s ease;
-        
-        :global(body.dark-mode) & {
-          background: variables.$bg-dark;
-          border-color: #555;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-        
+      }
+      
+      :host-context(.dark-mode) .dropdown-menu {
+        background: variables.$bg-dark;
+        border-color: #555;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+      
+      .dropdown-menu {
         .dropdown-item {
           background: none;
           border: none;
@@ -123,23 +121,26 @@
           display: flex;
           align-items: center;
           gap: 0.5rem;
-          
-          :global(body.dark-mode) & {
-            color: variables.$text-dark;
-          }
-          
+        }
+        
+        :host-context(.dark-mode) .dropdown-item {
+          color: variables.$text-dark;
+        }
+        
+        .dropdown-item {
           &:hover {
             background-color: #f5f5f5;
-            
-            :global(body.dark-mode) & {
-              background-color: #333;
-            }
           }
-          
+        }
+        
+        :host-context(.dark-mode) .dropdown-item:hover {
+          background-color: #333;
+        }
+        
+        .dropdown-item {
           &:first-child {
             border-radius: 4px 4px 0 0;
           }
-          
           &:last-child {
             border-radius: 0 0 4px 4px;
           }
@@ -149,7 +150,7 @@
             color: white;
             
             &:hover {
-              background-color: color.adjust(variables.$primary, $lightness: -10%);
+              background-color: variables.$primary-dark;
             }
           }
           
@@ -168,4 +169,8 @@
       }
     }
   }
+}
+
+:host-context(.dark-mode) .navbar {
+  background-color: variables.$primary-dark;
 }

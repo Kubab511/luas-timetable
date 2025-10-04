@@ -6,4 +6,28 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  a {
+    color: variables.$link-light;
+
+    &:visited {
+      color: variables.$link-visited-light;
+    }
+
+    &:hover {
+      color: variables.$link-hover-light;
+    }
+  }
+
+  :host-context(.dark-mode) a {
+    color: variables.$link-dark;
+
+    &:visited {
+      color: variables.$link-visited-dark;
+    }
+
+    &:hover {
+      color: variables.$link-hover-dark;
+    }
+  }
 }

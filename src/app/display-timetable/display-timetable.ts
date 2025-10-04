@@ -20,7 +20,7 @@ export class DisplayTimetable {
   @Input() locale: lang = lang.EN;
 
   get due() {
-    return (this.locale === lang.EN) ? "NOW" : "ANOIS"
+    return (this.locale === lang.EN) ? "DUE" : "ANN"
   }
 
   get stopLineClass() {

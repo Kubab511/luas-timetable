@@ -15,6 +15,7 @@
   margin-bottom: 20px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
 
   &.green-line {
     background: variables.$luas-green;
@@ -46,6 +47,22 @@
   }
 }
 
+:host-context(.dark-mode) .stop-info {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+  &.green-line {
+    background: variables.$luas-green-dark;
+  }
+
+  &.red-line {
+    background: variables.$luas-red-dark;
+  }
+
+  &:not(.green-line):not(.red-line) {
+    background: linear-gradient(135deg, variables.$primary-dark, color.adjust(variables.$primary-dark, $lightness: 10%));
+  }
+}
+
 .system-message {
   background-color: color.adjust(variables.$primary, $lightness: 25%);
   color: white;
@@ -55,6 +72,11 @@
   border-radius: 8px;
   margin-bottom: 20px;
   font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+:host-context(.dark-mode) .system-message {
+  background-color: color.adjust(variables.$primary-dark, $lightness: 15%);
 }
 
 .directions {
@@ -64,22 +86,35 @@
 }
 
 .direction {
-  background: white;
-  border: 1px solid #e0e0e0;
+  background: variables.$card-bg-light;
+  border: 1px solid variables.$border-light;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+:host-context(.dark-mode) .direction {
+  background: variables.$card-bg-dark;
+  border-color: variables.$border-dark;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .direction-name {
-  background-color: #f8f9fa;
-  color: #4F3189;
+  background-color: variables.$card-secondary-bg-light;
+  color: variables.$primary;
   margin: 0;
   padding: 16px 20px;
   font-size: 18px;
   font-weight: bold;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid variables.$border-light;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+:host-context(.dark-mode) .direction-name {
+  background-color: variables.$card-secondary-bg-dark;
+  color: color.adjust(variables.$primary, $lightness: 38%, $saturation: -6%);
+  border-bottom-color: variables.$border-dark;
 }
 
 .trams-list {
@@ -90,12 +125,16 @@
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid #f0f0f0;
-  transition: background-color 0.2s ease;
+  border-bottom: 1px solid variables.$border-tertiary-light;
+  transition: background-color 0.2s ease, border-color 0.3s ease;
 
   &:last-child {
     border-bottom: none;
   }
+}
+
+:host-context(.dark-mode) .tram-item {
+  border-bottom-color: variables.$border-tertiary-dark;
 }
 
 .due-time {
@@ -105,7 +144,7 @@
   min-width: 80px;
 
   .due-now {
-    background-color: #28a745;
+    background-color: variables.$success-bg;
     color: white;
     padding: 6px 12px;
     border-radius: 20px;
@@ -113,35 +152,63 @@
     font-size: 14px;
     text-transform: uppercase;
     animation: pulse 2s infinite;
+    transition: background-color 0.3s ease;
   }
 
   .due-minutes {
     font-size: 24px;
     font-weight: bold;
-    color: #4F3189;
+    color: variables.$primary;
     margin-right: 4px;
+    transition: color 0.3s ease;
   }
 
   .minutes-label {
     font-size: 14px;
-    color: #666;
+    color: variables.$text-secondary-light;
     font-weight: normal;
+    transition: color 0.3s ease;
+  }
+}
+
+:host-context(.dark-mode) .due-time {
+  .due-now {
+    background-color: variables.$success-bg-dark;
+  }
+
+  .due-minutes {
+    color: color.adjust(variables.$primary, $lightness: 38%, $saturation: -6%);
+  }
+
+  .minutes-label {
+    color: variables.$text-secondary-dark;
   }
 }
 
 .destination {
   flex: 1;
   font-size: 16px;
-  color: #333;
+  color: variables.$heading-light;
   font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+:host-context(.dark-mode) .destination {
+  color: variables.$heading-dark;
 }
 
 .no-trams {
   padding: 20px;
   text-align: center;
-  color: #666;
+  color: variables.$text-secondary-light;
   font-style: italic;
-  background-color: #f8f9fa;
+  background-color: variables.$card-secondary-bg-light;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+:host-context(.dark-mode) .no-trams {
+  color: variables.$text-secondary-dark;
+  background-color: variables.$card-secondary-bg-dark;
 }
 
 @keyframes pulse {

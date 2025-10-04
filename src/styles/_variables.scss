@@ -1,8 +1,61 @@
+@use 'sass:color';
+
+// Primary colors
 $primary: #4F3189;
+$primary-dark: color.adjust($primary, $lightness: -10%);
 $error: #c62828;
 $luas-red: #FF0000;
 $luas-green: #16A364;
+$luas-red-dark: color.adjust($luas-red, $lightness: -10%);
+$luas-green-dark: color.adjust($luas-green, $lightness: -10%);
+
+// Background colors
 $bg-dark: #121212;
 $bg-light: #FFFFFF;
+$card-bg-light: #FFFFFF;
+$card-bg-dark: #1E1E1E;
+$card-secondary-bg-light: #f8f9fa;
+$card-secondary-bg-dark: #2A2A2A;
+
+// Text colors
 $text-dark: #E0E0E0;
 $text-light: #000000;
+$text-secondary-light: #666666;
+$text-secondary-dark: #B0B0B0;
+$heading-light: #333333;
+$heading-dark: #E0E0E0;
+
+// Border colors
+$border-light: #e0e0e0;
+$border-dark: #3A3A3A;
+$border-secondary-light: #ddd;
+$border-secondary-dark: #555;
+$border-tertiary-light: #f0f0f0;
+$border-tertiary-dark: #2A2A2A;
+
+// Input colors
+$input-bg-light: #FFFFFF;
+$input-bg-dark: #2A2A2A;
+$input-border-light: #ddd;
+$input-border-dark: #555;
+$input-focus-border: #007bff;
+
+// Error/Alert colors
+$error-bg-light: #f8d7da;
+$error-bg-dark: #4A2020;
+$error-text-light: #721c24;
+$error-text-dark: #FF6B6B;
+$error-border-light: #f5c6cb;
+$error-border-dark: #6A2020;
+
+// Success colors
+$success-bg: #28a745;
+$success-bg-dark: #1E7A33;
+
+// Link colors
+$link-light: $primary;
+$link-hover-light: color.adjust($primary, $lightness: -12%);
+$link-visited-light: color.adjust($primary, $lightness: -25%, $saturation: -15%);
+$link-dark: color.adjust($primary, $lightness: 38%, $saturation: -6%);
+$link-hover-dark: color.adjust($primary, $lightness: 28%, $saturation: -6%);
+$link-visited-dark: color.adjust($primary, $lightness: 12%, $saturation: -20%);

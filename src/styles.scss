@@ -9,6 +9,12 @@ html, body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+html.dark-mode, 
+html.dark-mode body {
+  background-color: variables.$bg-dark;
+  color: variables.$text-dark;
+}
+
 body {
   display: flex;
   flex-direction: column;
