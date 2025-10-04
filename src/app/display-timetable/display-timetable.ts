@@ -51,11 +51,7 @@ export class DisplayTimetable {
   get lastRefreshed() {
     return (this.locale === lang.EN) ? "Last refreshed" : "Athnuachan deireanach";
   }
-
-  get noTrams() {
-    return (this.locale === lang.EN) ? "No trams" : "Gan tramanna";
-  }
-
+  
   get minutes() {
     return (this.locale === lang.EN) ? "min" : "nóim";
   }

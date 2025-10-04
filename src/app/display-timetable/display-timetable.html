@@ -3,7 +3,6 @@
     <div class="stop-info" [class]="stopLineClass">
       <h3>{{ timetable.stop.name | translateStopName }}</h3>
       <p class="stop-details">
-        <!-- <span class="abbreviation">{{ timetable.stop.abbreviation }}</span> -->
         <span class="created-date">{{ lastRefreshed }}: {{ timetable.stop.created | date:'HH:mm:ss' }}</span>
       </p>
     </div>
@@ -26,7 +25,7 @@
                   <div class="due-time">
                     @if (tram.dueMins === 'DUE' || tram.dueMins === '0') {
                       <span class="due-now">{{ due }}</span>
-                    } @else {
+                    } @else if (tram.dueMins !== '') {
                       <span class="due-minutes">{{ tram.dueMins }}</span>
                       <span class="minutes-label">{{ minutes }}</span>
                     }
@@ -37,7 +36,7 @@
             </div>
           } @else {
             <div class="no-trams">
-              <span>{{ noTrams }}</span>
+              <span>{{ "No trams forecast" | translateStopName }}</span>
             </div>
           }
         </div>
