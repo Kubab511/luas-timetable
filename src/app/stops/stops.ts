@@ -417,7 +417,7 @@ export const stops: StopType[] = [
   },
   {
     nameEN: "No trams forecast",
-    nameGA: "Gan tramanna",
+    nameGA: "Gan tramanna á thuar",
     line: line.NONE,
     code: "GTR"
   }
