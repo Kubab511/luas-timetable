@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TimetableService } from '../services/timetable.service';
@@ -7,6 +7,7 @@ import { lang } from '../types/lang';
 import { TranslateStopNamePipe } from '../pipes/translateName';
 import { stops } from '../stops/stops';
 import { line } from '../types/stopType';
+import { BehaviorSubject, catchError, distinctUntilChanged, EMPTY, filter, interval, startWith, Subscription, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-stop-selector',
@@ -19,53 +20,65 @@ import { line } from '../types/stopType';
   templateUrl: './stop-selector.html',
   styleUrl: './stop-selector.scss'
 })
-export class StopSelector implements OnInit {
+export class StopSelector implements OnInit, OnDestroy {
   constructor(private timetableService: TimetableService) {}
   @Input() locale: lang = lang.EN;
+  subscription: Subscription | null = null;
   
   stops = stops.filter(stop => stop.line != line.NONE);
   selectedStop = '';
+  stopCode$ = new BehaviorSubject<string>(this.selectedStop);
   luasData: any = null;
   loading = false;
   error = '';
 
   ngOnInit(): void {
-    this.selectedStop = localStorage.getItem("lastStop") ?? '';
-    if (this.selectedStop !== '') 
-      this.fetchLuasData();
+    const initialStop = localStorage.getItem("lastStop");
+
+    if (initialStop) {
+      this.selectedStop = initialStop;
+      this.stopCode$.next(this.selectedStop);
+    }
+
+    this.subscription = this.stopCode$.pipe(
+      filter(code => !!code),
+      distinctUntilChanged(),
+      switchMap((code) => {
+
+        this.loading = true;
+        this.error = '';
+        this.luasData = null;
+        
+        return interval(30 * 1000).pipe(
+          startWith(0),
+          switchMap(() => this.timetableService.getTimetable(code)),
+          catchError((err) => {
+            console.error('API Error:', err);
+            this.error = 'Error while fetching data';
+            this.loading = false;
+            return EMPTY; 
+          })
+        );
+      })
+    ).subscribe({
+      next: (data) => {
+        this.luasData = data;
+        this.loading = false;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   onStopSelect() {
     if (this.selectedStop) {
-      this.fetchLuasData();
+      this.stopCode$.next(this.selectedStop);
       localStorage.setItem("lastStop", this.selectedStop);
     }
-  }
-
-  private fetchLuasData() {
-    const selectedStopObj = this.stops.find(stop => stop.code === this.selectedStop);
-    // to się nie stanie ale lepiej mieć
-    if (!selectedStopObj) {
-      this.error = 'Stop not found';
-      return;
-    }
-    
-    const stopCode = selectedStopObj.code;
-    this.loading = true;
-    this.error = '';
-    this.luasData = null;
-
-    this.timetableService.getTimetable(stopCode).subscribe({
-      next: (data) => {
-        this.luasData = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        this.error = 'Error while fetching data';
-        this.loading = false;
-        console.error('API Error:', err);
-      }
-    });
   }
 
   get chooseStop() {

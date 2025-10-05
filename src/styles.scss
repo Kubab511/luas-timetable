@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use './styles/variables';
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 html, body {
   margin: 0;
@@ -7,6 +8,7 @@ html, body {
   background-color: variables.$bg-light;
   color: variables.$text-light;
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Inter', sans-serif;
 }
 
 html.dark-mode, 
