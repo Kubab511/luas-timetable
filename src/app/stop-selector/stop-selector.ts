@@ -53,6 +53,7 @@ export class StopSelector implements OnInit, OnDestroy {
 
     if (this.selectedStop && !this.filteredStops.some(stop => stop.code === this.selectedStop)) {
       this.selectedStop = '';
+      this.luasData = null;
     }
   }
 
@@ -110,6 +111,8 @@ export class StopSelector implements OnInit, OnDestroy {
     if (this.selectedStop) {
       this.stopCode$.next(this.selectedStop);
       localStorage.setItem("lastStop", this.selectedStop);
+    } else {
+      this.luasData = null;
     }
   }
 
@@ -118,11 +121,11 @@ export class StopSelector implements OnInit, OnDestroy {
   }
 
   get greenLine() {
-    return (this.locale === lang.EN) ? "Green" : "Glas";
+    return (this.locale === lang.EN) ? "Green Line" : "Líne Uaine";
   }
 
   get redLine() {
-    return (this.locale === lang.EN) ? "Red" : "Dearg";
+    return (this.locale === lang.EN) ? "Red Line" : "Líne Dhearg";
   }
 
   get bothLines() {
