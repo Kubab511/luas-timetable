@@ -7,7 +7,7 @@ import { lang } from '../types/lang';
 import { TranslateStopNamePipe } from '../pipes/translateName';
 import { stops } from '../stops/stops';
 import { line } from '../types/stopType';
-import { BehaviorSubject, catchError, distinctUntilChanged, EMPTY, filter, interval, startWith, Subscription, switchMap } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, filter, interval, startWith, Subscription, switchMap, retry, catchError, EMPTY, timer } from 'rxjs';
 
 @Component({
   selector: 'app-stop-selector',
@@ -51,13 +51,15 @@ export class StopSelector implements OnInit, OnDestroy {
         
         return interval(30 * 1000).pipe(
           startWith(0),
-          switchMap(() => this.timetableService.getTimetable(code)),
-          catchError((err) => {
-            console.error('API Error:', err);
-            this.error = 'Error while fetching data';
-            this.loading = false;
-            return EMPTY; 
-          })
+          switchMap(() => this.timetableService.getTimetable(code).pipe(
+            retry({ count: 10, delay: () => timer(1000) }),
+            catchError((err) => {
+              console.error('API Error:', err);
+              this.error = this.errorFetching;
+              this.loading = false;
+              return EMPTY;
+            })
+          ))
         );
       })
     ).subscribe({
@@ -82,10 +84,14 @@ export class StopSelector implements OnInit, OnDestroy {
   }
 
   get chooseStop() {
-    return (this.locale === lang.EN) ? "Choose a stop" : "Roghnaigh stad"
+    return (this.locale === lang.EN) ? "Choose a stop" : "Roghnaigh stad";
   }
 
   get loadingData() {
-    return (this.locale === lang.EN) ? "Loading data..." : "Sonraí á lódáil..." ;
+    return (this.locale === lang.EN) ? "Loading data..." : "Sonraí á lódáil...";
+  }
+
+  get errorFetching() {
+    return (this.locale === lang.EN) ? "Error while loading data" : "Earráid nuair sonraí á lódáil";
   }
 }
