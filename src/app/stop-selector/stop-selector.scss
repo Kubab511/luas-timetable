@@ -19,6 +19,9 @@
 
   .selector-container {
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   .stop-select {
@@ -89,5 +92,11 @@
     background-color: variables.$error-bg-dark;
     color: variables.$error-text-dark;
     border-color: variables.$error-border-dark;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .selector-container {
+    flex-direction: column;
   }
 }

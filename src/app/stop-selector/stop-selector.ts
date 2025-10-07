@@ -26,18 +26,47 @@ export class StopSelector implements OnInit, OnDestroy {
   subscription: Subscription | null = null;
   
   stops = stops.filter(stop => stop.line != line.NONE);
+  filteredStops = stops;
   selectedStop = '';
+  selectedLine = '';
   stopCode$ = new BehaviorSubject<string>(this.selectedStop);
   luasData: any = null;
   loading = false;
   error = '';
 
+  onLineSelect() {
+    if (this.selectedLine) {
+      localStorage.setItem("lastLine", this.selectedLine);
+    }
+
+    switch (this.selectedLine) {
+      case 'green':
+        this.filteredStops = this.stops.filter(stop => stop.line == line.GREEN);
+        break;
+      case 'red':
+        this.filteredStops = this.stops.filter(stop => stop.line == line.RED);
+        break;
+      default:
+        this.filteredStops = this.stops;
+        break;
+    }
+
+    if (this.selectedStop && !this.filteredStops.some(stop => stop.code === this.selectedStop)) {
+      this.selectedStop = '';
+    }
+  }
+
   ngOnInit(): void {
     const initialStop = localStorage.getItem("lastStop");
+    const initialLine = localStorage.getItem("lastLine");
 
     if (initialStop) {
       this.selectedStop = initialStop;
       this.stopCode$.next(this.selectedStop);
+    }
+
+    if (initialLine) {
+      this.selectedLine = initialLine;
     }
 
     this.subscription = this.stopCode$.pipe(
@@ -85,6 +114,18 @@ export class StopSelector implements OnInit, OnDestroy {
 
   get chooseStop() {
     return (this.locale === lang.EN) ? "Choose a stop" : "Roghnaigh stad";
+  }
+
+  get greenLine() {
+    return (this.locale === lang.EN) ? "Green" : "Glas";
+  }
+
+  get redLine() {
+    return (this.locale === lang.EN) ? "Red" : "Dearg";
+  }
+
+  get bothLines() {
+    return (this.locale === lang.EN) ? "All lines" : "Gach líne";
   }
 
   get loadingData() {
