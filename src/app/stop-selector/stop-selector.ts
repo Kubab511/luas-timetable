@@ -41,10 +41,10 @@ export class StopSelector implements OnInit, OnDestroy {
 
     switch (this.selectedLine) {
       case 'green':
-        this.filteredStops = this.stops.filter(stop => stop.line == line.GREEN);
+        this.filteredStops = this.stops.filter(stop => stop.line === line.GREEN);
         break;
       case 'red':
-        this.filteredStops = this.stops.filter(stop => stop.line == line.RED);
+        this.filteredStops = this.stops.filter(stop => stop.line === line.RED);
         break;
       default:
         this.filteredStops = this.stops;
@@ -67,6 +67,7 @@ export class StopSelector implements OnInit, OnDestroy {
 
     if (initialLine) {
       this.selectedLine = initialLine;
+      this.onLineSelect();
     }
 
     this.subscription = this.stopCode$.pipe(
