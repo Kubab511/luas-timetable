@@ -139,4 +139,8 @@ export class StopSelector implements OnInit, OnDestroy {
   get errorFetching() {
     return (this.locale === lang.EN) ? "Error while loading data" : "Earráid nuair sonraí á lódáil";
   }
+
+  get noStopChosen() {
+    return (this.locale === lang.EN) ? "No stop chosen" : "Níor roghnaíodh aon stad";
+  }
 }
