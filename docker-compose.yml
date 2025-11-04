@@ -1,0 +1,28 @@
+services:
+  luas-timetable:
+    image: ghcr.io/kubab511/luas-timetable:latest
+    container_name: luas-timetable
+    restart: unless-stopped
+    ports:
+      - "4444:80"
+    networks:
+      - web
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=300
+      - WATCHTOWER_LABEL_ENABLE=true
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
